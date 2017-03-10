@@ -1,19 +1,22 @@
 package com.gokhanozg;
 
+import java.util.List;
+
 /**
  * Created by gokhanozg on 3/10/17.
  */
-public class Milletvekili {
+public class Person {
     private String name;
-    private String parti;
+    private List<String> parties;
     private String il;
+    private List<String> companies;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Milletvekili that = (Milletvekili) o;
+        Person that = (Person) o;
 
         if (!name.equals(that.name)) return false;
         return il.equals(that.il);
@@ -28,10 +31,11 @@ public class Milletvekili {
 
     @Override
     public String toString() {
-        return "Milletvekili{" +
+        return "Person{" +
                 "name='" + name + '\'' +
-                ", parti='" + parti + '\'' +
+                ", parties=" + parties +
                 ", il='" + il + '\'' +
+                ", companies=" + companies +
                 '}';
     }
 
@@ -43,12 +47,20 @@ public class Milletvekili {
         this.name = name;
     }
 
-    public String getParti() {
-        return parti;
+    public List<String> getParties() {
+        return parties;
     }
 
-    public void setParti(String parti) {
-        this.parti = parti;
+    public void setParties(List<String> parties) {
+        this.parties = parties;
+    }
+
+    public List<String> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<String> companies) {
+        this.companies = companies;
     }
 
     public String getIl() {
