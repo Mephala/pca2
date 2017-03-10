@@ -80,6 +80,55 @@ public class Main {
                     System.out.println("Connected Individual:" + person.toString());
                 }
             }
+            int maxPart = 0;
+            int maxComp = 0;
+            for (Person person : people) {
+                int cmp = 0;
+                int cmc = 0;
+                List<String> parties = person.getParties();
+                List<String> compnyList = person.getCompanies();
+                if (parties != null) {
+                    cmp += parties.size();
+                }
+                if (compnyList != null) {
+                    cmc += compnyList.size();
+                }
+                if (cmp > maxPart)
+                    maxPart = cmp;
+                if (cmc == 11)
+                    System.out.println("Max company record goes to:" + person.toString());
+                if (cmc > maxComp)
+                    maxComp = cmc;
+            }
+            System.out.println("max party:" + maxPart + ", max company:" + maxComp);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Name,Party,City,Company1,Company2,Company3,Company4,Company5,Company6,Company7,Company8,Company9,Company10,Company11" + System.lineSeparator());
+            for (Person person : people) {
+                sb.append(person.getName() + ",");
+                if (person.getParties() == null)
+                    sb.append(",");
+                else
+                    sb.append(person.getParties().get(0) + ",");
+                sb.append(person.getIl() + ",");
+                for (int i = 0; i < 11; i++) {
+                    if (person.getCompanies() == null || person.getCompanies().size() == 0) {
+                        if (i != 10)
+                            sb.append(",");
+                    } else {
+                        if (person.getCompanies().size() > i) {
+                            sb.append(person.getCompanies().get(i) + ",");
+                        } else {
+                            if (i != 10)
+                                sb.append(",");
+                        }
+                    }
+                }
+                sb.append(System.lineSeparator());
+            }
+            File out = new File("refinedData.csv");
+            if (out.exists())
+                out.delete();
+            FileUtils.write(out, sb.toString(), Charset.forName("UTF-8"));
         } catch (Throwable t) {
             t.printStackTrace();
         }
